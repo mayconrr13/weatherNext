@@ -1,7 +1,22 @@
 import React, { FormEvent, useState } from 'react';
+import {
+    FiCloudRain,
+    FiCloud,
+    FiWind,
+    FiDroplet,
+    FiGithub,
+    FiLinkedin,
+} from 'react-icons/fi';
 import axios from 'axios';
 
-import { Container } from '../styles/Home';
+import {
+    Container,
+    Location,
+    CurrentWeather,
+    AdditionalInfo,
+    Forecast,
+} from '../styles/pages/Home';
+import Footer from '../components/Footer';
 
 interface ForecastDailyProps {
     date: string;
@@ -80,6 +95,8 @@ export default function Home() {
 
     return (
         <Container>
+            <img src="/images/at-day.jpg" alt="Background" />
+
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -92,20 +109,66 @@ export default function Home() {
 
             {weatherInfo ? (
                 <>
-                    <h1>{weatherInfo.location.name}</h1>
-                    <h1>{weatherInfo.location.country}</h1>
-                    <h1>{weatherInfo.current.temp_c}</h1>
-                    <h1>{weatherInfo.current.is_day}</h1>
-                    {weatherInfo.forecast.forecastday.map(
-                        (data: ForecastDailyProps) => (
-                            <>
-                                <p>{data.date}</p>
-                                <p>{data.day.maxtemp_c}</p>
-                                <p>{data.day.mintemp_c}</p>
-                                <p>{data.day.condition.text}</p>
-                            </>
-                        ),
-                    )}
+                    <Location>
+                        {weatherInfo.location.name},{' '}
+                        {weatherInfo.location.country}
+                    </Location>
+                    <CurrentWeather>
+                        <div>
+                            <strong>13</strong>
+                            <div>
+                                <FiCloudRain />
+                                <div>
+                                    <p>oC</p>
+                                    <span />
+                                    <p>oF</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Patchy rain possible</p>
+                    </CurrentWeather>
+                    <AdditionalInfo>
+                        <div>
+                            <FiCloud />
+                            <p>15%</p>
+                        </div>
+                        <div>
+                            <FiWind />
+                            <p>11 km/h</p>
+                        </div>
+                        <div>
+                            <FiDroplet />
+                            <p>15%</p>
+                        </div>
+                    </AdditionalInfo>
+                    <span />
+                    <Forecast>
+                        <div>
+                            <p>Today</p>
+                            <FiCloudRain />
+                            <div>
+                                <p>15o</p>
+                                <p>12o</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Today</p>
+                            <FiCloudRain />
+                            <div>
+                                <p>15o</p>
+                                <p>12o</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Today</p>
+                            <FiCloudRain />
+                            <div>
+                                <p>15o</p>
+                                <p>12o</p>
+                            </div>
+                        </div>
+                    </Forecast>
+                    <Footer />
                 </>
             ) : (
                 <p>{error}</p>
