@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { FiCloudRain } from 'react-icons/fi';
 
 import { WeatherContext } from '../context/WeatherContext';
 
@@ -16,8 +15,10 @@ import SearchBox from '../components/SearchBox';
 import AdditionalInfo from '../components/AdditionalInfo';
 import Forecast from '../components/Forecast';
 
+import handleWeatherIcons from '../utils/handleWeatherIcons';
+
 interface ForecastDailyProps {
-    date: string;
+    date_epoch: number;
     day: {
         maxtemp_c: number;
         maxtemp_f: number;
@@ -25,7 +26,7 @@ interface ForecastDailyProps {
         mintemp_f: number;
         condition: {
             text: string;
-            code: string;
+            code: number;
         };
     };
 }
@@ -46,7 +47,18 @@ export default function Home() {
                         <div>
                             <p>{weatherInfo.current.temp_c.toFixed(0)}</p>
                             <div>
-                                <FiCloudRain />
+                                <img
+                                    src={`/icons/${
+                                        weatherInfo.current.is_day
+                                            ? 'day'
+                                            : 'night'
+                                    }/${handleWeatherIcons(
+                                        weatherInfo.current.condition.code,
+                                    )}.svg`}
+                                    alt={`Icon: ${handleWeatherIcons(
+                                        weatherInfo.current.condition.code,
+                                    )}`}
+                                />
                                 <UnitMeasure>
                                     <button type="button">°C</button>
                                     <span />
@@ -65,6 +77,7 @@ export default function Home() {
                                     <Forecast
                                         minTemperature={data.day.mintemp_c}
                                         maxTemperature={data.day.maxtemp_c}
+                                        day={data.date_epoch}
                                     />
                                 ),
                             )}

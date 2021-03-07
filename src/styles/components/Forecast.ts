@@ -6,13 +6,17 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    height: 7rem;
-
     font-size: 1.25rem;
 
-    > svg {
+    > img {
         width: 1.75rem;
-        height: auto;
+        height: 1.75rem;
+
+        margin: 1rem 0;
+
+        position: relative;
+
+        z-index: 2;
     }
 `;
 

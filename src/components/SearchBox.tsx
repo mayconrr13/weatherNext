@@ -6,12 +6,6 @@ import { WeatherContext } from '../context/WeatherContext';
 
 import { Container } from '../styles/components/SearchBox';
 
-interface SearchBoxProps {
-    city: string;
-    setCity: (prop: string) => void;
-    handleSubmit: (event: FormEvent) => void;
-}
-
 const SearchBox = () => {
     const { city, setCity, setError, setWeatherInfo } = useContext(
         WeatherContext,

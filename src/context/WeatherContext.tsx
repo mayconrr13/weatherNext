@@ -14,7 +14,7 @@ interface ChildrenProps {
 }
 
 interface ForecastDailyProps {
-    date: string;
+    date_epoch: number;
     day: {
         maxtemp_c: number;
         maxtemp_f: number;
@@ -22,7 +22,7 @@ interface ForecastDailyProps {
         mintemp_f: number;
         condition: {
             text: string;
-            code: string;
+            code: number;
         };
     };
 }
@@ -40,7 +40,7 @@ interface WeatherInfoProps {
         is_day: number;
         condition: {
             text: string;
-            code: string;
+            code: number;
         };
         wind_kph: number;
         wind_degree: number;

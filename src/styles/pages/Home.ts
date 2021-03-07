@@ -61,15 +61,19 @@ export const CurrentWeather = styled.div`
             justify-content: space-between;
             align-items: center;
 
-            > svg {
+            > img {
                 width: 3rem;
                 height: auto;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;
+
+                position: relative;
+
+                z-index: 2;
             }
         }
     }
 
-    > {
+    > p {
         font-size: 1rem;
     }
 `;
@@ -83,7 +87,7 @@ export const UnitMeasure = styled.div`
         border: none;
         background: none;
 
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 
     > span {
