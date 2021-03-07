@@ -4,17 +4,19 @@ import {
     FiCloud,
     FiWind,
     FiDroplet,
-    FiGithub,
-    FiLinkedin,
+    FiSearch,
 } from 'react-icons/fi';
 import axios from 'axios';
 
 import {
     Container,
+    Form,
     Location,
     CurrentWeather,
     AdditionalInfo,
     Forecast,
+    UnitMeasure,
+    Temperature,
 } from '../styles/pages/Home';
 import Footer from '../components/Footer';
 
@@ -83,7 +85,6 @@ export default function Home() {
             const fetchedData = await response.data;
 
             setWeatherInfo(fetchedData);
-            console.log(fetchedData.forecast.forecastday);
 
             setCity('');
         } catch (err) {
@@ -97,32 +98,31 @@ export default function Home() {
         <Container>
             <img src="/images/at-day.jpg" alt="Background" />
 
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="City"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                 />
-                <button type="submit">Search</button>
-            </form>
+                <button type="submit">
+                    <FiSearch />
+                </button>
+            </Form>
 
             {weatherInfo ? (
                 <>
-                    <Location>
-                        {weatherInfo.location.name},{' '}
-                        {weatherInfo.location.country}
-                    </Location>
+                    <Location>{weatherInfo.location.name}</Location>
                     <CurrentWeather>
                         <div>
-                            <strong>13</strong>
+                            <p>13</p>
                             <div>
                                 <FiCloudRain />
-                                <div>
-                                    <p>oC</p>
+                                <UnitMeasure>
+                                    <button type="button">oC</button>
                                     <span />
-                                    <p>oF</p>
-                                </div>
+                                    <button type="button">oF</button>
+                                </UnitMeasure>
                             </div>
                         </div>
                         <p>Patchy rain possible</p>
@@ -146,33 +146,34 @@ export default function Home() {
                         <div>
                             <p>Today</p>
                             <FiCloudRain />
-                            <div>
+                            <Temperature>
                                 <p>15o</p>
                                 <p>12o</p>
-                            </div>
+                            </Temperature>
                         </div>
                         <div>
-                            <p>Today</p>
+                            <p>Saturday</p>
                             <FiCloudRain />
-                            <div>
-                                <p>15o</p>
+                            <Temperature>
                                 <p>12o</p>
-                            </div>
+                                <p>8o</p>
+                            </Temperature>
                         </div>
                         <div>
-                            <p>Today</p>
+                            <p>Sunday</p>
                             <FiCloudRain />
-                            <div>
-                                <p>15o</p>
-                                <p>12o</p>
-                            </div>
+                            <Temperature>
+                                <p>-3o</p>
+                                <p>-5o</p>
+                            </Temperature>
                         </div>
                     </Forecast>
-                    <Footer />
                 </>
             ) : (
                 <p>{error}</p>
             )}
+
+            <Footer />
         </Container>
     );
 }
