@@ -33,43 +33,6 @@ export const Container = styled.div`
     }
 `;
 
-export const Form = styled.form`
-    width: 80vw;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0 1rem;
-    margin: 1.5rem 0;
-
-    background: none;
-    border-bottom: 1px solid #f4ede8;
-
-    > input {
-        height: 50px;
-        width: calc(80vw - 50px);
-        background: none;
-
-        font-size: 1.5rem;
-
-        &::placeholder {
-            color: #f4ede8;
-        }
-    }
-
-    > button {
-        height: 50px;
-        width: 50px;
-        background: none;
-
-        > svg {
-            height: 1.5rem;
-            width: auto;
-        }
-    }
-`;
-
 export const Location = styled.p`
     font-size: 1.75rem;
     margin-top: 4.5rem;
@@ -132,33 +95,7 @@ export const UnitMeasure = styled.div`
     }
 `;
 
-export const AdditionalInfo = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin: 2rem 0;
-
-    width: 80vw;
-
-    > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-
-        > svg {
-            width: 2.25rem;
-            height: auto;
-        }
-
-        > p {
-            font-size: 1.25rem;
-        }
-    }
-`;
-
-export const Forecast = styled.div`
+export const DailyForecast = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -166,28 +103,4 @@ export const Forecast = styled.div`
     width: 80vw;
 
     margin-top: 2rem;
-
-    > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-
-        height: 7rem;
-
-        font-size: 1.25rem;
-
-        > svg {
-            width: 1.75rem;
-            height: auto;
-        }
-    }
-`;
-
-export const Temperature = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    font-size: 1.25rem;
 `;

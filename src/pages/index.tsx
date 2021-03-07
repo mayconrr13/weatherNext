@@ -1,24 +1,20 @@
-import React, { FormEvent, useState } from 'react';
-import {
-    FiCloudRain,
-    FiCloud,
-    FiWind,
-    FiDroplet,
-    FiSearch,
-} from 'react-icons/fi';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { FiCloudRain } from 'react-icons/fi';
+
+import { WeatherContext } from '../context/WeatherContext';
 
 import {
     Container,
-    Form,
     Location,
     CurrentWeather,
-    AdditionalInfo,
-    Forecast,
     UnitMeasure,
-    Temperature,
+    DailyForecast,
 } from '../styles/pages/Home';
+
 import Footer from '../components/Footer';
+import SearchBox from '../components/SearchBox';
+import AdditionalInfo from '../components/AdditionalInfo';
+import Forecast from '../components/Forecast';
 
 interface ForecastDailyProps {
     date: string;
@@ -34,140 +30,45 @@ interface ForecastDailyProps {
     };
 }
 
-interface WeatherInfoProps {
-    location: {
-        name: string;
-        region: string;
-        country: string;
-        localtime_epoch: number;
-    };
-    current: {
-        temp_c: number;
-        temp_f: number;
-        is_day: number;
-        condition: {
-            text: string;
-            code: string;
-        };
-        wind_kph: number;
-        wind_degree: number;
-        wind_dir: string;
-        pressure_mb: string;
-        precip_mm: string;
-        humidity: string;
-        cloud: string;
-    };
-    forecast: {
-        forecastday: ForecastDailyProps[];
-    };
-}
-
 export default function Home() {
-    const [city, setCity] = useState<string>('');
-    const [error, setError] = useState<string>('');
-    const [weatherInfo, setWeatherInfo] = useState<WeatherInfoProps | null>(
-        null,
-    );
-
-    async function handleSubmit(event: FormEvent): Promise<void> {
-        event.preventDefault();
-
-        if (!city) {
-            setError('Please, type a city name');
-            return;
-        }
-
-        try {
-            const response = await axios.get(
-                `https://api.weatherapi.com/v1/forecast.json?key=1a30c2c65ae9479db8732838210403&q=${city}&days=7&aqi=no&alerts=no
-                `,
-            );
-            const fetchedData = await response.data;
-
-            setWeatherInfo(fetchedData);
-
-            setCity('');
-        } catch (err) {
-            setError('No matching location found');
-            setWeatherInfo(null);
-            setCity('');
-        }
-    }
+    const { error, weatherInfo } = useContext(WeatherContext);
 
     return (
         <Container>
             <img src="/images/at-day.jpg" alt="Background" />
 
-            <Form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="City"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-                <button type="submit">
-                    <FiSearch />
-                </button>
-            </Form>
+            <SearchBox />
 
             {weatherInfo ? (
                 <>
                     <Location>{weatherInfo.location.name}</Location>
                     <CurrentWeather>
                         <div>
-                            <p>13</p>
+                            <p>{weatherInfo.current.temp_c.toFixed(0)}</p>
                             <div>
                                 <FiCloudRain />
                                 <UnitMeasure>
-                                    <button type="button">oC</button>
+                                    <button type="button">°C</button>
                                     <span />
-                                    <button type="button">oF</button>
+                                    <button type="button">°F</button>
                                 </UnitMeasure>
                             </div>
                         </div>
-                        <p>Patchy rain possible</p>
+                        <p>{weatherInfo.current.condition.text}</p>
                     </CurrentWeather>
-                    <AdditionalInfo>
-                        <div>
-                            <FiCloud />
-                            <p>15%</p>
-                        </div>
-                        <div>
-                            <FiWind />
-                            <p>11 km/h</p>
-                        </div>
-                        <div>
-                            <FiDroplet />
-                            <p>15%</p>
-                        </div>
-                    </AdditionalInfo>
+                    <AdditionalInfo />
                     <span />
-                    <Forecast>
-                        <div>
-                            <p>Today</p>
-                            <FiCloudRain />
-                            <Temperature>
-                                <p>15o</p>
-                                <p>12o</p>
-                            </Temperature>
-                        </div>
-                        <div>
-                            <p>Saturday</p>
-                            <FiCloudRain />
-                            <Temperature>
-                                <p>12o</p>
-                                <p>8o</p>
-                            </Temperature>
-                        </div>
-                        <div>
-                            <p>Sunday</p>
-                            <FiCloudRain />
-                            <Temperature>
-                                <p>-3o</p>
-                                <p>-5o</p>
-                            </Temperature>
-                        </div>
-                    </Forecast>
+                    <DailyForecast>
+                        {weatherInfo &&
+                            weatherInfo.forecast.forecastday.map(
+                                (data: ForecastDailyProps) => (
+                                    <Forecast
+                                        minTemperature={data.day.mintemp_c}
+                                        maxTemperature={data.day.maxtemp_c}
+                                    />
+                                ),
+                            )}
+                    </DailyForecast>
                 </>
             ) : (
                 <p>{error}</p>
