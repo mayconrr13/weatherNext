@@ -11,8 +11,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        width: 100vw;
-        height: 100vh;
+        > div {
+            background: linear-gradient(180deg, #12121250, #12121250);
+            min-height: 100vh;
+
+            z-index: 10;
+        }
     }
 
     button, input {

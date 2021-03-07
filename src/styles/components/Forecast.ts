@@ -6,7 +6,9 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    font-size: 1.25rem;
+    font-size: 1rem;
+
+    width: 7.5rem;
 
     > img {
         width: 1.75rem;
@@ -23,7 +25,7 @@ export const Container = styled.div`
 export const Temperature = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 
     font-size: 1.25rem;
 

@@ -3,17 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100vw;
     height: 100vh;
+    height: max-content;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    background: linear-gradient(180deg, #12121240, #12121210);
-
     img {
-        position: absolute;
-        top: 0;
+        position: fixed;
+        bottom: 0;
         left: 0;
+
+        display: table;
 
         object-fit: cover;
         object-position: 55% 0;

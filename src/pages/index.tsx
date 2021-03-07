@@ -36,7 +36,12 @@ export default function Home() {
 
     return (
         <Container>
-            <img src="/images/at-day.jpg" alt="Background" />
+            <img
+                src={`/images/${
+                    weatherInfo?.current.is_day ? 'at-day' : 'at-night'
+                }.jpg`}
+                alt="Background"
+            />
 
             <SearchBox />
 
