@@ -30,4 +30,8 @@ export const Temperature = styled.div`
     font-size: 1.25rem;
 
     width: 100%;
+
+    p + p {
+        color: #f4ede899;
+    }
 `;

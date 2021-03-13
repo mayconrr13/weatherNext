@@ -89,6 +89,7 @@ export const UnitMeasure = styled.div`
         background: none;
 
         font-size: 1.5rem;
+        color: #f4ede890;
     }
 
     > span {
@@ -97,6 +98,10 @@ export const UnitMeasure = styled.div`
         background: #f4ede8;
 
         margin: 0 0.5rem;
+    }
+
+    button.active {
+        color: #f4ede8;
     }
 `;
 

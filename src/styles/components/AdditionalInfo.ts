@@ -18,6 +18,7 @@ export const Container = styled.div`
         > svg {
             width: 2.25rem;
             height: auto;
+            margin-bottom: 0.5rem;
         }
 
         > p {

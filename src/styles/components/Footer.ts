@@ -1,12 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.footer`
+interface ContainerProps {
+    info: boolean;
+}
+
+export const Container = styled.footer<ContainerProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 
     margin: 3rem 0 1rem 0;
+
+    ${(props) =>
+        !props.info &&
+        css`
+            position: absolute;
+            bottom: 1rem;
+        `}
 
     > div {
         display: flex;

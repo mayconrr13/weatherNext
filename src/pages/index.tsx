@@ -32,7 +32,9 @@ interface ForecastDailyProps {
 }
 
 export default function Home() {
-    const { error, weatherInfo } = useContext(WeatherContext);
+    const { error, weatherInfo, isCelsius, setIsCelsius } = useContext(
+        WeatherContext,
+    );
 
     return (
         <Container>
@@ -50,7 +52,11 @@ export default function Home() {
                     <Location>{weatherInfo.location.name}</Location>
                     <CurrentWeather>
                         <div>
-                            <p>{weatherInfo.current.temp_c.toFixed(0)}</p>
+                            <p>
+                                {isCelsius
+                                    ? weatherInfo.current.temp_c.toFixed(0)
+                                    : weatherInfo.current.temp_f.toFixed(0)}
+                            </p>
                             <div>
                                 <img
                                     src={`/icons/${
@@ -65,9 +71,21 @@ export default function Home() {
                                     )}`}
                                 />
                                 <UnitMeasure>
-                                    <button type="button">°C</button>
+                                    <button
+                                        type="button"
+                                        className={isCelsius ? 'active' : ''}
+                                        onClick={() => setIsCelsius(true)}
+                                    >
+                                        °C
+                                    </button>
                                     <span />
-                                    <button type="button">°F</button>
+                                    <button
+                                        type="button"
+                                        className={isCelsius ? '' : 'active'}
+                                        onClick={() => setIsCelsius(false)}
+                                    >
+                                        °F
+                                    </button>
                                 </UnitMeasure>
                             </div>
                         </div>
@@ -80,8 +98,16 @@ export default function Home() {
                             weatherInfo.forecast.forecastday.map(
                                 (data: ForecastDailyProps) => (
                                     <Forecast
-                                        minTemperature={data.day.mintemp_c}
-                                        maxTemperature={data.day.maxtemp_c}
+                                        minTemperature={
+                                            isCelsius
+                                                ? data.day.mintemp_c
+                                                : data.day.mintemp_f
+                                        }
+                                        maxTemperature={
+                                            isCelsius
+                                                ? data.day.maxtemp_c
+                                                : data.day.maxtemp_f
+                                        }
                                         day={data.date_epoch}
                                     />
                                 ),

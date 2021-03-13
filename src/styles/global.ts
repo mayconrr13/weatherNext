@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
-    button, input {
+    button, input, a {
         cursor: pointer;
     }
 `;

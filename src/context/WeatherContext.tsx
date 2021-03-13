@@ -7,6 +7,8 @@ interface WeatherContextData {
     setError: (error: string) => void;
     weatherInfo: WeatherInfoProps | null;
     setWeatherInfo: (weatherInfo: WeatherInfoProps | null) => void;
+    isCelsius: boolean;
+    setIsCelsius: (isCelsiues: boolean) => void;
 }
 
 interface ChildrenProps {
@@ -65,6 +67,7 @@ const WeatherProvider = ({ children }: ChildrenProps) => {
     const [weatherInfo, setWeatherInfo] = useState<WeatherInfoProps | null>(
         null,
     );
+    const [isCelsius, setIsCelsius] = useState<boolean>(true);
 
     return (
         <WeatherContext.Provider
@@ -75,6 +78,8 @@ const WeatherProvider = ({ children }: ChildrenProps) => {
                 setError,
                 weatherInfo,
                 setWeatherInfo,
+                isCelsius,
+                setIsCelsius,
             }}
         >
             {children}
