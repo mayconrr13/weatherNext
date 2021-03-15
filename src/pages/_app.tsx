@@ -6,14 +6,14 @@ import { WeatherProvider } from '../context/WeatherContext';
 import GlobalStyle from '../styles/global';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    return (
-        <>
-            <WeatherProvider>
-                <Component {...pageProps} />
-            </WeatherProvider>
-            <GlobalStyle />
-        </>
-    );
+  return (
+    <>
+      <WeatherProvider>
+        <Component {...pageProps} />
+        <GlobalStyle />
+      </WeatherProvider>
+    </>
+  );
 }
 
 export default MyApp;
