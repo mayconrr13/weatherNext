@@ -39,9 +39,7 @@ const DailyForecast = () => {
                     <DailyItem key={data.date_epoch}>
                       <p>{getWeekDay(data.date_epoch)}</p>
                       <img
-                        src={`/icons/${
-                          weatherInfo.current.is_day ? 'day' : 'night'
-                        }/${handleWeatherIcons(
+                        src={`/icons/day/${handleWeatherIcons(
                           weatherInfo.current.condition.code,
                         )}.svg`}
                         alt={`Icon: ${handleWeatherIcons(

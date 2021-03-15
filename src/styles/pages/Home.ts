@@ -1,11 +1,33 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ThemeCheck {
+  theme: number;
+}
+
+export const Container = styled.div<ThemeCheck>`
   min-width: 375px;
   height: 100vh;
   overflow-y: auto;
 
-  background: linear-gradient(287.35deg, #fdbb2d 23.11%, #64afd3 96.52%);
+  ${(props) =>
+    props.theme === 1
+      ? css`
+          background: linear-gradient(
+            287.35deg,
+            #fdbb2d 23.11%,
+            #64afd3 96.52%
+          );
+        `
+      : css`
+          background: linear-gradient(
+            284.04deg,
+            #090705 0%,
+            #353036 18.23%,
+            #574b4a 72.4%,
+            #19181e 100%
+          );
+        `};
+  transition: background 0.2s;
   background-size: 100% 100%;
 
   padding: 2rem 1rem 0 1rem;
@@ -28,7 +50,7 @@ export const Footer = styled.footer`
   p {
     font-size: 1.25rem;
     text-align: center;
-    color: #222;
+    color: #ffffff;
 
     padding-bottom: 2rem;
   }
@@ -36,7 +58,7 @@ export const Footer = styled.footer`
   a,
   a:after {
     text-decoration: none;
-    color: #222222;
+    color: inherit;
   }
 `;
 

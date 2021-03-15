@@ -13,7 +13,7 @@ export default function Home() {
   const { error, weatherInfo, loading } = useContext(WeatherContext);
 
   return (
-    <Container>
+    <Container theme={weatherInfo?.current.is_day}>
       <FormBox />
 
       {!loading && weatherInfo && (

@@ -28,9 +28,9 @@ const CurrentWeather = () => {
           </p>
           <Forecast>
             <img
-              src={`/icons/${
-                weatherInfo.current.is_day ? 'day' : 'night'
-              }/${handleWeatherIcons(weatherInfo.current.condition.code)}.svg`}
+              src={`/icons/day/${handleWeatherIcons(
+                weatherInfo.current.condition.code,
+              )}.svg`}
               alt={`Icon: ${handleWeatherIcons(
                 weatherInfo.current.condition.code,
               )}`}

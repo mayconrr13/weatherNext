@@ -29,7 +29,7 @@ const FormBox = () => {
 
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/forecast.json?key=1a30c2c65ae9479db8732838210403&q=${city}&days=7&aqi=no&alerts=no
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${city}&days=7&aqi=no&alerts=no
             `,
       );
       const fetchedData = await response.data;
@@ -62,3 +62,11 @@ const FormBox = () => {
 };
 
 export default FormBox;
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    },
+  };
+}
